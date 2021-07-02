@@ -1,10 +1,9 @@
-package com.dancy.maintain.controller;
+package com.dancy.maintain.controller.admin;
 
-import com.dancy.maintain.pojo.User;
+import com.dancy.maintain.pojo.admin.User;
 import com.dancy.maintain.result.Result;
-import com.dancy.maintain.result.ResultCode;
 import com.dancy.maintain.result.ResultFactory;
-import com.dancy.maintain.service.UserService;
+import com.dancy.maintain.service.admin.interf.UserService;
 import com.dancy.maintain.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,15 +25,15 @@ public class LoginController {
 
     @PostMapping("/user/login")
     public Result login(@RequestBody User user) {
-        System.out.println(user);
         HashMap<String, Object> res = new HashMap<>();
         try {
             User userDB = userService.login(user);
             Map<String, Object> payload = new HashMap<>();
             payload.put("username", userDB.getUsername());
-            payload.put("role", user.getRole());
             String token = TokenUtil.getToken(payload);
+            res.put("username", userDB.getUsername());
             res.put("token", token);
+            res.put("rights", userDB.getRole());
             return ResultFactory.buildSuccessResult(res);
         }catch (Exception e) {
             return ResultFactory.buildFailResult("查无用户");

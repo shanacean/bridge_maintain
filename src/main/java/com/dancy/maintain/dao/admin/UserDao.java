@@ -1,6 +1,6 @@
-package com.dancy.maintain.dao;
+package com.dancy.maintain.dao.admin;
 
-import com.dancy.maintain.pojo.User;
+import com.dancy.maintain.pojo.admin.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

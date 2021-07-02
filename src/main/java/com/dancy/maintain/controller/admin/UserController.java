@@ -1,9 +1,9 @@
-package com.dancy.maintain.controller;
+package com.dancy.maintain.controller.admin;
 
-import com.dancy.maintain.pojo.User;
+import com.dancy.maintain.pojo.admin.User;
 import com.dancy.maintain.result.Result;
 import com.dancy.maintain.result.ResultFactory;
-import com.dancy.maintain.service.UserServiceImpl;
+import com.dancy.maintain.service.admin.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,6 @@
-package com.dancy.maintain.service;
+package com.dancy.maintain.service.admin.interf;
 
-import com.dancy.maintain.pojo.User;
+import com.dancy.maintain.pojo.admin.User;
 import org.springframework.data.domain.Page;
 
 public interface UserService {

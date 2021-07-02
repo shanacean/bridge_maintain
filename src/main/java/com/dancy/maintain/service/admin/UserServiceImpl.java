@@ -1,7 +1,8 @@
-package com.dancy.maintain.service;
+package com.dancy.maintain.service.admin;
 
-import com.dancy.maintain.dao.UserDao;
-import com.dancy.maintain.pojo.User;
+import com.dancy.maintain.dao.admin.UserDao;
+import com.dancy.maintain.pojo.admin.User;
+import com.dancy.maintain.service.admin.interf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,16 +29,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(User user) {
         User userDB = userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+        System.out.println(userDB);
         if (userDB != null)
             return userDB;
-
         throw new RuntimeException("登录失败");
     }
 
 
     @Override
     public Page<User> findAllByPage(Integer pageNum, Integer pageSize, String username) {
-        Pageable pageRequest = PageRequest.of(pageNum - 1, pageSize, Sort.by(Sort.Direction.ASC, "role"));
+        Pageable pageRequest = PageRequest.of(pageNum - 1, pageSize, Sort.by(Sort.Direction.ASC, "id"));
 
         Specification<User> specification = (Specification<User>) (root, criteriaQuery, criteriaBuilder) -> {
             Path<Object> objectPath = root.get("username");
