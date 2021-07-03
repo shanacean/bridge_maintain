@@ -1,5 +1,8 @@
 package com.dancy.maintain.pojo.bridge;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -45,6 +48,7 @@ public class Bridge implements Serializable {
     private String buildUnit;
 
     @Column(name = "build_year", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date buildYear;
 
     @Column(name = "maintain_type", nullable = false, length = 50)
@@ -82,5 +86,6 @@ public class Bridge implements Serializable {
 
     @ManyToOne(targetEntity = BridgeType.class)
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
+    @JsonIgnoreProperties({"bridges"})
     private BridgeType bridgeType;
 }

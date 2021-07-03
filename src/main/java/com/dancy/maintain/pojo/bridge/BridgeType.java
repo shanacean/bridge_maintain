@@ -2,6 +2,7 @@ package com.dancy.maintain.pojo.bridge;
 
 import com.dancy.maintain.pojo.intermediate.TypeComponent;
 import com.dancy.maintain.pojo.intermediate.TypePart;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,12 +31,14 @@ public class BridgeType implements Serializable {
     @Column(name = "type_name", nullable = false, length = 50)
     private String typeName;
 
-    @OneToMany(mappedBy = "bridgeType", orphanRemoval = true)
+    @OneToMany(mappedBy = "bridgeType", orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Bridge> bridges;
 
     @OneToMany(targetEntity = TypePart.class, mappedBy = "bridgeType")
+    @JsonIgnore
     private Set<TypePart> typeParts;
 
     @OneToMany(targetEntity = TypeComponent.class, mappedBy = "bridgeType")
+    @JsonIgnore
     private Set<TypeComponent> typeComponentSet;
 }
