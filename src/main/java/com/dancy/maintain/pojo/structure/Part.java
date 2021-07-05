@@ -35,5 +35,4 @@ public class Part implements Serializable {
 
     @OneToMany(mappedBy = "part")
     private Set<TypePart> typeParts;
-
 }

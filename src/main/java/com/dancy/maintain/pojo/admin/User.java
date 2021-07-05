@@ -1,11 +1,14 @@
 package com.dancy.maintain.pojo.admin;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.dancy.maintain.pojo.check.DailyCheck;
+import com.dancy.maintain.pojo.check.RegularCheck;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @program: bridge_maintain_backend
@@ -31,8 +34,15 @@ public class User implements Serializable {
 
         @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "role_id", referencedColumnName = "role_id")
-//        @JsonIgnoreProperties({"users"})
         private Role role;
+
+        @OneToMany(mappedBy = "user")
+        @JsonIgnore
+        private Set<DailyCheck> dailyCheckSet;
+
+        @OneToMany(mappedBy = "user")
+        @JsonIgnore
+        private Set<RegularCheck> regularCheckSet;
 
         @Override
         public String toString() {

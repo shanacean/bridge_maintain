@@ -2,6 +2,7 @@ package com.dancy.maintain.pojo.check;
 
 import com.dancy.maintain.pojo.admin.User;
 import com.dancy.maintain.pojo.bridge.Bridge;
+import com.dancy.maintain.pojo.intermediate.DailyItem;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;

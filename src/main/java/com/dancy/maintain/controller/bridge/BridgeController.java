@@ -30,7 +30,6 @@ public class BridgeController {
 
     @GetMapping("/page")
     public Result getAllByPage(Integer pageNum, Integer pageSize, String bridgeName) {
-        System.out.println(bridgeService.findAllByPage(pageNum, pageSize, bridgeName));
         return ResultFactory.buildSuccessResult(bridgeService.findAllByPage(pageNum, pageSize, bridgeName));
     }
 

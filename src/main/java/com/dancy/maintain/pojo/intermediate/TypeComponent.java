@@ -24,6 +24,7 @@ public class TypeComponent implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "type_component_id")
     private Long typeComponentId;
 
     @Column(name = "weight")

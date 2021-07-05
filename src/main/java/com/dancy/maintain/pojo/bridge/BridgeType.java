@@ -4,6 +4,7 @@ import com.dancy.maintain.pojo.intermediate.TypeComponent;
 import com.dancy.maintain.pojo.intermediate.TypePart;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ import java.util.Set;
 @org.hibernate.annotations.Table(appliesTo = "bridge_type", comment = "桥梁类型表")
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"bridgeSet", "typePartSet", "typeComponentSet"})
 public class BridgeType implements Serializable {
     private static final long serialVersionUID = -2109537706881498920L;
     @Id
@@ -32,11 +34,12 @@ public class BridgeType implements Serializable {
     private String typeName;
 
     @OneToMany(mappedBy = "bridgeType", orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<Bridge> bridges;
+    @JsonIgnore
+    private Set<Bridge> bridgeSet;
 
     @OneToMany(targetEntity = TypePart.class, mappedBy = "bridgeType")
     @JsonIgnore
-    private Set<TypePart> typeParts;
+    private Set<TypePart> typePartSet;
 
     @OneToMany(targetEntity = TypeComponent.class, mappedBy = "bridgeType")
     @JsonIgnore

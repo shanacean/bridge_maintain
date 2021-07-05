@@ -1,5 +1,7 @@
 package com.dancy.maintain.pojo.bridge;
 
+import com.dancy.maintain.pojo.check.DailyCheck;
+import com.dancy.maintain.pojo.check.RegularCheck;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -9,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * @program: maintain
@@ -86,6 +89,13 @@ public class Bridge implements Serializable {
 
     @ManyToOne(targetEntity = BridgeType.class)
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
-    @JsonIgnoreProperties({"bridges"})
     private BridgeType bridgeType;
+
+    @OneToMany(mappedBy = "bridge")
+    @JsonIgnore
+    private Set<DailyCheck> dailyCheckSet;
+
+    @OneToMany(mappedBy = "bridge")
+    @JsonIgnore
+    private Set<RegularCheck> regularCheckSet;
 }

@@ -1,5 +1,7 @@
-package com.dancy.maintain.pojo.check;
+package com.dancy.maintain.pojo.intermediate;
 
+import com.dancy.maintain.pojo.check.CheckItem;
+import com.dancy.maintain.pojo.check.DailyCheck;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
