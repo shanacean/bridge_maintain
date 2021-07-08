@@ -41,4 +41,8 @@ public class Role implements Serializable {
     @ManyToMany(targetEntity =MainMenu.class, fetch = FetchType.EAGER)
     @JoinTable(name = "role_menu", joinColumns = {@JoinColumn(name = "role_id")}, inverseJoinColumns = {@JoinColumn(name = "mid")})
     private Set<MainMenu> mainMenus;
+
+    public Role(Long roleId) {
+        this.roleId = roleId;
+    }
 }

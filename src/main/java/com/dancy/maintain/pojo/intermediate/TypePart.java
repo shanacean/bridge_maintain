@@ -2,6 +2,7 @@ package com.dancy.maintain.pojo.intermediate;
 
 import com.dancy.maintain.pojo.bridge.BridgeType;
 import com.dancy.maintain.pojo.structure.Part;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -36,5 +37,6 @@ public class TypePart implements Serializable {
 
     @ManyToOne(targetEntity = Part.class)
     @JoinColumn(name = "part_id", referencedColumnName = "part_id")
+    @JsonIgnoreProperties(ignoreUnknown = true, value = {"typeParts", "components"})
     private Part part;
 }

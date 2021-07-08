@@ -22,6 +22,7 @@ public class BridgeController {
 
     @PostMapping
     public Result addBridge(@RequestBody Bridge bridge) {
+        System.out.println(bridge);
         Bridge newBridge = bridgeService.bridgeCreate(bridge);
         if (newBridge != null)
             return ResultFactory.buildSuccessResult(null);
@@ -39,5 +40,4 @@ public class BridgeController {
             return ResultFactory.buildSuccessResult(null);
         return ResultFactory.buildFailResult("删除失败");
     }
-
 }

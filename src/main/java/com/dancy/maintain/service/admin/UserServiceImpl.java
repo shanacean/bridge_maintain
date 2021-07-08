@@ -1,6 +1,8 @@
 package com.dancy.maintain.service.admin;
 
+import com.dancy.maintain.dao.admin.RoleDao;
 import com.dancy.maintain.dao.admin.UserDao;
+import com.dancy.maintain.pojo.admin.Role;
 import com.dancy.maintain.pojo.admin.User;
 import com.dancy.maintain.service.admin.interf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
+import java.util.List;
 
 /**
  * @program: bridge_maintain_backend
@@ -24,6 +27,9 @@ import javax.persistence.criteria.*;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private RoleDao roleDao;
 
 
     @Override
@@ -66,5 +72,10 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Role> findAllRoles() {
+        return roleDao.findAll();
     }
 }

@@ -3,6 +3,7 @@ package com.dancy.maintain.pojo.bridge;
 import com.dancy.maintain.pojo.intermediate.TypeComponent;
 import com.dancy.maintain.pojo.intermediate.TypePart;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"bridgeSet", "typePartSet", "typeComponentSet"})
+@JsonIgnoreProperties({"bridgeSet"})
 public class BridgeType implements Serializable {
     private static final long serialVersionUID = -2109537706881498920L;
     @Id
@@ -33,15 +35,19 @@ public class BridgeType implements Serializable {
     @Column(name = "type_name", nullable = false, length = 50)
     private String typeName;
 
-    @OneToMany(mappedBy = "bridgeType", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bridgeType", orphanRemoval = true)
     @JsonIgnore
     private Set<Bridge> bridgeSet;
 
-    @OneToMany(targetEntity = TypePart.class, mappedBy = "bridgeType")
-    @JsonIgnore
+    @OneToMany(targetEntity = TypePart.class, mappedBy = "bridgeType", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(ignoreUnknown = true, value = {"bridgeType"})
     private Set<TypePart> typePartSet;
 
-    @OneToMany(targetEntity = TypeComponent.class, mappedBy = "bridgeType")
-    @JsonIgnore
+    @OneToMany(targetEntity = TypeComponent.class, mappedBy = "bridgeType", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties(ignoreUnknown = true, value = {"bridgeType"})
     private Set<TypeComponent> typeComponentSet;
+
+    public BridgeType(Long typeId) {
+        this.typeId = typeId;
+    }
 }

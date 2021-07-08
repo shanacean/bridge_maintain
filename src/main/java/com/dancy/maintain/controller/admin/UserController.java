@@ -19,12 +19,17 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @GetMapping("")
+    @GetMapping
     public Result getAllByPage(Integer pageNum, Integer pageSize, String username) {
         return ResultFactory.buildSuccessResult(userService.findAllByPage(pageNum, pageSize, username));
     }
 
-    @PostMapping("")
+    @GetMapping("/role")
+    public Result getAllRoles() {
+        return ResultFactory.buildSuccessResult(userService.findAllRoles());
+    }
+
+    @PostMapping
     public Result addUser(@RequestBody User user) {
         System.out.println(user);
         User res = userService.userCreate(user);
@@ -34,7 +39,7 @@ public class UserController {
         return ResultFactory.buildFailResult("插入失败!");
     }
 
-    @PutMapping("")
+    @PutMapping
     public Result updateState(@RequestParam("id")Integer id, @RequestParam("state")Boolean state) {
         System.out.println("id:" + id + "state:" + state);
         int flag = userService.userStateUpdate(id, state);
@@ -42,7 +47,7 @@ public class UserController {
                 : ResultFactory.buildFailResult("更新用户状态失败!");
     }
 
-    @DeleteMapping("")
+    @DeleteMapping
     public Result deleteUser(@RequestParam("id")Integer id) {
         if (userService.userDelete(id))
             return ResultFactory.buildSuccessResult(null);

@@ -2,6 +2,7 @@ package com.dancy.maintain.pojo.structure;
 
 import com.dancy.maintain.pojo.intermediate.TypePart;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ import java.util.Set;
 @org.hibernate.annotations.Table(appliesTo = "part", comment = "桥梁部位")
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"components", "typeParts"})
 public class Part implements Serializable {
     private static final long serialVersionUID = -1046116332743073815L;
 
