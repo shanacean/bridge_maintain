@@ -1,6 +1,8 @@
 package com.dancy.maintain.pojo.structure;
 
 import com.dancy.maintain.pojo.intermediate.TypePart;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -33,8 +35,10 @@ public class Part implements Serializable {
     private String partName;
 
     @OneToMany(mappedBy = "part", orphanRemoval = true)
+    @JsonIgnore
     private Set<Component> components;
 
     @OneToMany(mappedBy = "part")
+    @JsonIgnore
     private Set<TypePart> typeParts;
 }

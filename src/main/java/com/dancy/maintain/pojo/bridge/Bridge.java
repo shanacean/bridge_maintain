@@ -99,4 +99,8 @@ public class Bridge implements Serializable {
     @OneToMany(mappedBy = "bridge")
     @JsonIgnore
     private Set<RegularCheck> regularCheckSet;
+
+    public Bridge(Long bridgeId) {
+        this.bridgeId = bridgeId;
+    }
 }

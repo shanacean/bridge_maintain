@@ -40,11 +40,11 @@ public class BridgeType implements Serializable {
     private Set<Bridge> bridgeSet;
 
     @OneToMany(targetEntity = TypePart.class, mappedBy = "bridgeType", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties(ignoreUnknown = true, value = {"bridgeType"})
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private Set<TypePart> typePartSet;
 
     @OneToMany(targetEntity = TypeComponent.class, mappedBy = "bridgeType", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties(ignoreUnknown = true, value = {"bridgeType"})
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private Set<TypeComponent> typeComponentSet;
 
     public BridgeType(Long typeId) {

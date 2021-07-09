@@ -6,9 +6,12 @@ import com.dancy.maintain.service.bridge.interf.BridgeService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @program: maintain
@@ -22,6 +25,11 @@ public class BridgeServiceImpl implements BridgeService {
 
     public BridgeServiceImpl(BridgeDao bridgeDao) {
         this.bridgeDao = bridgeDao;
+    }
+
+    @Override
+    public List<Bridge> findAll() {
+        return bridgeDao.findAll(Sort.by(Sort.Direction.ASC, "bridgeId"));
     }
 
     @Override

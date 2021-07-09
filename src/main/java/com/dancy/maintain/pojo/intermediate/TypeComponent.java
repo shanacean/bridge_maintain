@@ -2,6 +2,7 @@ package com.dancy.maintain.pojo.intermediate;
 
 import com.dancy.maintain.pojo.bridge.BridgeType;
 import com.dancy.maintain.pojo.structure.Component;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,9 +33,11 @@ public class TypeComponent implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "type_id", referencedColumnName = "type_id")
+    @JsonIgnoreProperties({"bridgeSet", "typePartSet", "typeComponentSet"})
     private BridgeType bridgeType;
 
     @ManyToOne
     @JoinColumn(name = "component_id", referencedColumnName = "component_id")
+    @JsonIgnoreProperties(ignoreUnknown = true, value = {"typeComponentSet"})
     private Component component;
 }

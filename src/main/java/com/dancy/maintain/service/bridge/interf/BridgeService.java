@@ -3,7 +3,12 @@ package com.dancy.maintain.service.bridge.interf;
 import com.dancy.maintain.pojo.bridge.Bridge;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface BridgeService {
+    //返回全部，作为el-select选项
+    List<Bridge> findAll();
+
     //添加桥梁资料卡
     Bridge bridgeCreate(Bridge bridge);
 

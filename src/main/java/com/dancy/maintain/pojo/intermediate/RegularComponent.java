@@ -1,6 +1,7 @@
 package com.dancy.maintain.pojo.intermediate;
 
 import com.dancy.maintain.pojo.check.RegularCheck;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,9 +29,11 @@ public class RegularComponent {
 
     @ManyToOne
     @JoinColumn(name = "type_component_id", referencedColumnName = "type_component_id")
+    @JsonIgnore
     private TypeComponent typeComponent;
 
     @ManyToOne
     @JoinColumn(name = "regular_id", referencedColumnName = "regular_id")
+    @JsonIgnore
     private RegularCheck regularCheck;
 }

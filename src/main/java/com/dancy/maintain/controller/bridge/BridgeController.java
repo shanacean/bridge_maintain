@@ -29,6 +29,11 @@ public class BridgeController {
         return ResultFactory.buildFailResult("添加失败!");
     }
 
+    @GetMapping()
+    public Result getAll() {
+        return ResultFactory.buildSuccessResult(bridgeService.findAll());
+    }
+
     @GetMapping("/page")
     public Result getAllByPage(Integer pageNum, Integer pageSize, String bridgeName) {
         return ResultFactory.buildSuccessResult(bridgeService.findAllByPage(pageNum, pageSize, bridgeName));

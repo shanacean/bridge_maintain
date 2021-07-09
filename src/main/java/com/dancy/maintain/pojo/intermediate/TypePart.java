@@ -33,6 +33,7 @@ public class TypePart implements Serializable {
 
     @ManyToOne(targetEntity = BridgeType.class)
     @JoinColumn(name = "type_Id", referencedColumnName = "type_Id")
+    @JsonIgnoreProperties(ignoreUnknown = true, value = {"bridgeSet", "typePartSet", "typeComponentSet"})
     private BridgeType bridgeType;
 
     @ManyToOne(targetEntity = Part.class)
