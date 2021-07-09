@@ -1,11 +1,11 @@
 package com.dancy.maintain.pojo.check;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * @program: maintain
@@ -18,6 +18,7 @@ import java.util.Set;
 @org.hibernate.annotations.Table(appliesTo = "check_item", comment = "日常检测项表")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class CheckItem implements Serializable {
     private static final long serialVersionUID = 7513815746546715044L;
 
