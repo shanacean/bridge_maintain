@@ -4,6 +4,7 @@ import com.dancy.maintain.pojo.check.RegularCheck;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -18,6 +19,7 @@ import javax.persistence.*;
 @org.hibernate.annotations.Table(appliesTo = "regular_component", comment = "定期检测表和构件值关系")
 @Data
 @NoArgsConstructor
+@ToString(exclude = "regularCheck")
 public class RegularComponent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +29,12 @@ public class RegularComponent {
     @Column(name = "value")
     private Double value;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "type_component_id", referencedColumnName = "type_component_id")
-    @JsonIgnore
     private TypeComponent typeComponent;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "regular_id", referencedColumnName = "regular_id")
-    @JsonIgnore
     private RegularCheck regularCheck;
+
 }

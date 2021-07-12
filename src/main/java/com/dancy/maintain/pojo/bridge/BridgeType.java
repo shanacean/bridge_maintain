@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,7 +24,7 @@ import java.util.Set;
 @org.hibernate.annotations.Table(appliesTo = "bridge_type", comment = "桥梁类型表")
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"bridgeSet", "typePartSet", "typeComponentSet"})
+@EqualsAndHashCode(exclude = {"bridgeSet", "typePartSet", "typeComponentList"})
 @JsonIgnoreProperties({"bridgeSet"})
 public class BridgeType implements Serializable {
     private static final long serialVersionUID = -2109537706881498920L;
@@ -45,7 +46,7 @@ public class BridgeType implements Serializable {
 
     @OneToMany(targetEntity = TypeComponent.class, mappedBy = "bridgeType", fetch = FetchType.EAGER)
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private Set<TypeComponent> typeComponentSet;
+    private Set<TypeComponent> typeComponentList;
 
     public BridgeType(Long typeId) {
         this.typeId = typeId;

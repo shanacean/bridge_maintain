@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Set;
 @org.hibernate.annotations.Table(appliesTo = "component", comment = "构件类型")
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"part", "typeComponentSet"})
+@EqualsAndHashCode(exclude = {"part", "typeComponentList"})
 public class Component implements Serializable {
     private static final long serialVersionUID = -7215071215776028131L;
 
@@ -37,5 +38,5 @@ public class Component implements Serializable {
     private Part part;
 
     @OneToMany(mappedBy = "component")
-    private Set<TypeComponent> typeComponentSet;
+    private List<TypeComponent> typeComponentList;
 }

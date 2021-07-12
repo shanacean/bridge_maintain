@@ -27,7 +27,7 @@ import java.util.List;
 @org.hibernate.annotations.Table(appliesTo = "daily_check", comment = "日常检测表")
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"bridge", "user", "dailyItemSet"})
+@EqualsAndHashCode(exclude = {"bridge", "user", "dailyItemList"})
 @EntityListeners(AuditingEntityListener.class)
 public class DailyCheck implements Serializable {
     private static final long serialVersionUID = 5007011556373332183L;

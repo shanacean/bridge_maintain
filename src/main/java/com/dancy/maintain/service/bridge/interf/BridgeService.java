@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public interface BridgeService {
+    Bridge findById(Long bridgeId);
     //返回全部，作为el-select选项
     List<Bridge> findAll();
 

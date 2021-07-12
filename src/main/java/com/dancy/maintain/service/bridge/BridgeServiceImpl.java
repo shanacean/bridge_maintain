@@ -28,6 +28,11 @@ public class BridgeServiceImpl implements BridgeService {
     }
 
     @Override
+    public Bridge findById(Long bridgeId) {
+        return bridgeDao.findById(bridgeId).orElse(null);
+    }
+
+    @Override
     public List<Bridge> findAll() {
         return bridgeDao.findAll(Sort.by(Sort.Direction.ASC, "bridgeId"));
     }

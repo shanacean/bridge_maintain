@@ -34,6 +34,7 @@ public class LoginController {
             res.put("username", userDB.getUsername());
             res.put("token", token);
             res.put("rights", userDB.getRole());
+            res.put("userId", userDB.getId());
             return ResultFactory.buildSuccessResult(res);
         }catch (Exception e) {
             return ResultFactory.buildFailResult("查无用户");

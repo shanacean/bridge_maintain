@@ -4,7 +4,9 @@ import com.dancy.maintain.pojo.check.DailyCheck;
 import com.dancy.maintain.pojo.check.RegularCheck;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,36 +23,41 @@ import java.util.Set;
 @org.hibernate.annotations.Table(appliesTo = "user", comment = "用户表")
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"dailyCheckSet", "regularCheckSet"})
 public class User implements Serializable {
 
-        private static final long serialVersionUID = 169161545953478080L;
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "user_id")
-        private Integer id;
-        private String username;
-        private String password;
-        private Boolean state;
+    private static final long serialVersionUID = 169161545953478080L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private Integer id;
+    private String username;
+    private String password;
+    private Boolean state;
 
-        @ManyToOne(fetch = FetchType.EAGER)
-        @JoinColumn(name = "role_id", referencedColumnName = "role_id")
-        private Role role;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    private Role role;
 
-        @OneToMany(mappedBy = "user")
-        @JsonIgnore
-        private Set<DailyCheck> dailyCheckSet;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<DailyCheck> dailyCheckSet;
 
-        @OneToMany(mappedBy = "user")
-        @JsonIgnore
-        private Set<RegularCheck> regularCheckSet;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<RegularCheck> regularCheckSet;
 
-        @Override
-        public String toString() {
-                return "User{" +
-                        "id=" + id +
-                        ", username='" + username + '\'' +
-                        ", password='" + password + '\'' +
-                        ", state=" + state +
-                        '}';
-        }
+    public User(Integer userId) {
+        this.id = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", state=" + state +
+                '}';
+    }
 }

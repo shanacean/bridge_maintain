@@ -6,13 +6,16 @@ import com.dancy.maintain.pojo.intermediate.RegularComponent;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -27,6 +30,8 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode(exclude = {"user", "bridge", "regularComponentList"})
+@ToString(exclude = {"bridge"})
 public class RegularCheck implements Serializable {
     private static final long serialVersionUID = 2586250927363456615L;
 
@@ -47,7 +52,7 @@ public class RegularCheck implements Serializable {
     @Column(name = "bci_value")
     private Double bciValue;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @JsonIgnoreProperties({"role", "dailyCheckSet", "regularCheckSet"})
     private User user;
@@ -57,6 +62,11 @@ public class RegularCheck implements Serializable {
     @JsonIgnoreProperties({"bridgeType", "dailyCheckSet", "regularCheckSet"})
     private Bridge bridge;
 
-    @OneToMany(mappedBy = "regularCheck", cascade = CascadeType.ALL)
-    private Set<RegularComponent> regularComponentSet;
+    @OneToMany(mappedBy = "regularCheck", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"regularCheck"})
+    private List<RegularComponent> regularComponentList;
+
+    public RegularCheck(Long regularId) {
+        this.regularId = regularId;
+    }
 }

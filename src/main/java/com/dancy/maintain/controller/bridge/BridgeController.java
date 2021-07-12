@@ -20,16 +20,21 @@ public class BridgeController {
     @Autowired
     BridgeServiceImpl bridgeService;
 
+    @GetMapping("/")
+    public Result getById(@RequestParam Long bridgeId) {
+        System.out.println(bridgeId);
+        return ResultFactory.buildSuccessResult(bridgeService.findById(bridgeId));
+    }
+
     @PostMapping
     public Result addBridge(@RequestBody Bridge bridge) {
-        System.out.println(bridge);
         Bridge newBridge = bridgeService.bridgeCreate(bridge);
         if (newBridge != null)
             return ResultFactory.buildSuccessResult(null);
         return ResultFactory.buildFailResult("添加失败!");
     }
 
-    @GetMapping()
+    @GetMapping
     public Result getAll() {
         return ResultFactory.buildSuccessResult(bridgeService.findAll());
     }

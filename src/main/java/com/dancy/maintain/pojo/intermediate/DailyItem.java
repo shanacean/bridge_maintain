@@ -43,7 +43,7 @@ public class DailyItem implements Serializable {
     @JoinColumn(name = "check_id", referencedColumnName = "check_id")
     private DailyCheck dailyCheck;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "item_id", referencedColumnName = "item_id")
     private CheckItem checkItem;
 }
